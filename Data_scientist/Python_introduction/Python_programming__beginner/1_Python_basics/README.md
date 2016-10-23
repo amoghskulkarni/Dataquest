@@ -45,9 +45,9 @@ Data Scientist / Python Introduction / Python Programming: Beginner / Python Bas
 ----------------
 - Lists can be sliced like `l[i:j]`
 
-Where,
-l = list variable
-i = starting index
+Where -
+l = list variable,
+i = starting index,
 j = ending index (not inclusive, i.e. sliced list doesn't contain j'th element)
 
 - Example
