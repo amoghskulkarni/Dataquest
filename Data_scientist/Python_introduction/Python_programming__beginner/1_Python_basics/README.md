@@ -48,7 +48,9 @@ l = list variable
 i = starting index
 j = ending index (not inclusive, i.e. sliced list doesn't contain j'th element)
 - Example
-    l = [10,20,30,40,50,60,70,80,90,100]
-    l[3:6] # will give [40,50,60]
-    l[7:8] # will give [80]
-    l[5:len(l)] # will give the slice of index 5 to end
+```python
+l = [10,20,30,40,50,60,70,80,90,100]
+l[3:6] # will give [40,50,60]
+l[7:8] # will give [80]
+l[5:len(l)] # will give the slice of index 5 to end
+```
