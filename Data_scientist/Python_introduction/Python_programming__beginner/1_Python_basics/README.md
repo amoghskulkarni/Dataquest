@@ -43,10 +43,13 @@ Data Scientist / Python Introduction / Python Programming: Beginner / Python Bas
 - len() function
 16. List slicing
 ----------------
-- Lists can be sliced like l[i:j]
+- Lists can be sliced like `l[i:j]`
+
+Where,
 l = list variable
 i = starting index
 j = ending index (not inclusive, i.e. sliced list doesn't contain j'th element)
+
 - Example
 ```python
 l = [10,20,30,40,50,60,70,80,90,100]
