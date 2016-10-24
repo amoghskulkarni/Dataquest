@@ -16,9 +16,11 @@ Day,Type of Weather
 8,Sunny
 9,Fog
 10,Rain
+...
 ```
 
 `Day` - A number from `1` to `365`
+
 `Type of Weather` - Type of weather. Can be one of `Rain`, `Sunny`, `Fog`, `Fog-Rain` or `Thunderstorm`
 
 2. Parsing the file
@@ -50,6 +52,8 @@ weather = []
 for wd in weather_data:
     weather.append(wd[1])
 ```
+
+- There is a better approach to this. More on that in the next lessons.
 
 4. Counting the items in a list
 -------------------------------
