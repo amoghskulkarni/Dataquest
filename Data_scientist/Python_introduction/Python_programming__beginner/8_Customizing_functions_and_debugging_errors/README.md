@@ -14,7 +14,7 @@ One return in `if`, another in `else`. Kids stuff.
 3. Optional arguments
 ---------------------
 
-It is actually telling us about the default values that some arguments can take. For example, this code of
+Actually about the default values that some arguments can take. For example, this code of
 `tokenize()` function, which accepts an additional argument called `clean` depnding upon which the string will
 be cleaned. If nothing is passed in place of `clean` argument, it won't be cleaned because the default value is
 `False`. 
