@@ -55,9 +55,51 @@ nfl = list(csv.reader(f))
 6. Counting how many times a team won
 -------------------------------------
 
+`nfl` contains csv data in the form of a list, `patriots_wins` is the counter.
+
 ```python
 winner_column = 2
 for game in nfl:
     if game[winner_column] == "New England Patriots":
         patriots_wins += 1
 ```
+
+7. Making a function to count wins
+----------------------------------
+
+A function which has the above code in its body, and accepts the name of the team as an argument.
+
+8. A brief note about booleans
+------------------------------
+
+`and` and `or` operators. And their truth tables. Zz.
+
+9. The `or` keyword
+-------------------
+
+Zzz.
+
+10. Working with boolean operators
+----------------------------------
+
+Examples for `and` and `or`.
+
+11. Counting wins in a given year
+---------------------------------
+
+Check the given year and the given team in the row for gathering the datapoints. Use `and`.
+
+```python
+year_column = 0
+winner_column = 2
+def nfl_wins_in_a_year(team, year):
+    count = 0
+    for row in nfl:
+        if row[0] == year and row[2] == team:
+            count = count + 1
+    return count
+```
+
+12. Sharing modules
+-------------------
+
