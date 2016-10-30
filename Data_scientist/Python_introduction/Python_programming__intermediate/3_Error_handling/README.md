@@ -59,6 +59,46 @@ When the Python interpreter creates an exception, it actually creates an instanc
 try:
     int('')
 except Exception as exc:
-    print(type(exc))            # Prints type of Exception
+    print(type(exc))            # <class 'ValueError'>
+    print(str(exc))             # invalid literal for int() with base 10: ''
 ```
 
+8. The `pass` keyword
+---------------------
+
+The `pass` keyword is used when you don't want to include anything special in the body of `except` block. It essentially
+is a dummy statement for a custom `except` block.
+
+9. Convert birth years to integers
+----------------------------------
+
+Append the birthyear in `int` to the row, and if it is `''` then append 0.
+
+```python
+birthday_col = 2
+birth_year_col = 0
+for legislator in legislators:
+    birth_year = 0
+    try:
+        date = legislator[birthday_col].split('-')
+        birth_year = int(date[birth_year_col])
+    except:
+        pass
+    legislator.append(birth_year)
+```
+
+10. Fill in years without a value
+---------------------------------
+
+Years which are set to 0, are set to the years of the last row.
+
+```python
+last_value = 1
+for legislator in legislators:
+    if legislator[7] == 0:
+        legislator[7] = last_value
+    last_value = legislator[7]
+```
+
+`last_value` keeps track of the previous row's column no 7 in `legislator`, and sets it to the next occurrance of `0`
+in the same column.
