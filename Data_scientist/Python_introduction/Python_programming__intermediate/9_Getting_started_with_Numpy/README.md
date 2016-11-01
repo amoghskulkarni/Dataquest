@@ -8,8 +8,8 @@ Data Scientist / Data Analysis and Visualization / Data Analysis with Pandas: In
 
 Year | WHO Region | Country | Beverage Types | Display value
 :---:|:---:|:---:|:---:|:---:|
-`1986` | `Western Pacific` | `Viet Nam` | `Wine` | `0`
-`1986` | `Americas` | `Uruguay` | `Other` | `0.5`
+`1986` | `'Western Pacific'` | `'Viet Nam'` | `'Wine'` | `0`
+`1986` | `'Americas'` | `'Uruguay'` | `'Other'` | `0.5`
 
 2. Lists of lists
 -----------------
