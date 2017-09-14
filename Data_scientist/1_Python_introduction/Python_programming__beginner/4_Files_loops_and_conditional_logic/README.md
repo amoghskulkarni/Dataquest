@@ -4,6 +4,8 @@ Data Scientist / Python Introduction / Python Programming: Beginner / Challenge:
 1. How challenges work
 ----------------------
 
+For this challenge, you'll be working with the data set behind this FiveThirtyEight article on common unisex (gender-neutral) names in the United States. You'll start by reading in the file and iteratively converting the data to more useful representations. At the end of this challenge, you'll filter the data so that it only includes the names that at least 1,000 people share.
+
 2. Unisex names
 ---------------
 
