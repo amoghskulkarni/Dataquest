@@ -60,6 +60,14 @@ for wd in weather_data:
 
 Are you kidding me? 
 
+- Stupid approach
+
+```python
+count = 0
+for item in weather:
+    count = count + 1
+```
+
 5. Slicing lists
 ----------------
 
