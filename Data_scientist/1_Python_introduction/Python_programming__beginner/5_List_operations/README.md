@@ -103,9 +103,12 @@ weather_no_header = weather[1:]
 
 ```python
 animals = ["cat", "dog", "rabbit"]
+cat_found = False
 for animal in animals:
     if animal == "cat":
-        print("Cat found")
+        cat_found = True
+if cat_found:
+    print("Cat found")
 ```
 
 is equivalent to
