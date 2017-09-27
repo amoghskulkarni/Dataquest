@@ -110,5 +110,3 @@ for ts in tokenized_story:
     if ts not in tokenized_vocabulary:
         misspelled_words.append(ts)
 ```
-
-Test commit 
