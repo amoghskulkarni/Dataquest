@@ -98,3 +98,20 @@ def feature_counter(input_lst,index, input_str, header_row = False):
 
 `header_row` is an optional argument here (which is by default `False`), which shows whether the data being passed has the 
 header row in it.
+
+7. Calling a Function inside another Function
+---------------------------------------------
+
+Write a `summary_statistics()` function that will take movie_data as input, and output a dictionary that will give useful 
+numbers from the data.
+
+Numbers to be obtained - number of movies made in Japan, number of movies in color, number of movies in English 
+
+```python
+def summary_statistics(input_lst):
+    num_japan_films = feature_counter(input_lst,6,"Japan",True)
+    num_color_films = feature_counter(input_lst,2,"Color",True)
+    num_films_in_english = feature_counter(input_lst,5,"English",True)
+    summary_dict = {"japan_films" : num_japan_films, "color_films" : num_color_films, "films_in_english" : num_films_in_english}
+    return summary_dict
+```
