@@ -24,6 +24,24 @@ import math
 print(math.sqrt(4.0))       # 2.00
 ```
 
+**Namespace** is a dictionary that contains all of the names we can refer to in our code. When we import a module this way, we add all of the objects and functions within that module to the global namespace. Before running our code, the Python interpreter adds all of the objects and functions that are available by default (`print()`, `list()`, etc.) to the global namespace.
+
+Some modules have long names, however, and this means that we need to use the full module name each time we want to use any of the objects within that module. Instead, we can assign an alias when we import the module -
+
+```python
+import my_module as m
+m.function1()
+```
+
+You can avoid typing the name of the module again and again by importing specific contents of the module in the namespace directly. That way you don't have to type `.` along with the name of the module.
+
+```python
+from math import function1
+from math import function1, function2
+```
+
+Or you can add everything in the module by using `*`, but it is not a good practice. Avoid **polluting namespace** by adding specific contents of the module.
+
 3. The `math` module
 --------------------
 
