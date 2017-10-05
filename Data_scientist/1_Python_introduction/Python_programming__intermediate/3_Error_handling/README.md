@@ -43,7 +43,17 @@ The formed set can again be converted into a list by using `list()` method.
 ------------------------
 
 For discovering valuable things such as missing values, values that don't make any intuitive sense
-or recurring themes from the data can be found out using `set` of values.
+or recurring themes from the data can be found out using `set` of values (as given in the following
+example) -
+
+```python
+gender = []
+for item in legislators:
+    gender.append(item[3])
+
+gender = set(gender)
+print(gender)           # {'', 'M', 'F'}
+```
 
 4. Missing values
 -----------------
@@ -53,16 +63,32 @@ Some datasets can have misssing values which can be dealt with -
 - Removing the data point
 - Initializing the data point with a default value
 - Initializing the data point with a calculated value
+- Use analysis techniques that work with missing data.
 
 5. Parsing birth years
 ----------------------
 
 Change format of the value of birthday from `"YYYY-MM-DD"` to `["YYYY", "MM", "DD"]`. Use `split()`.
 
+```python
+birth_years = []
+for row in legislators:
+    birthday = row[2]
+    parts = birthday.split("-")
+    birth_years.append(parts[0])
+```
+
 6. Try/Except blocks
 --------------------
 
 Basics of try-except blocks.
+
+```python
+try:
+    float("hello")
+except Exception:
+    print("Error converting to float.")
+```
 
 7. Exception instances
 ----------------------
@@ -93,8 +119,9 @@ birthday_col = 2
 birth_year_col = 0
 for legislator in legislators:
     birth_year = 0
+    birthday = legislator[birthday_col]
+    date = birthday.split('-')
     try:
-        date = legislator[birthday_col].split('-')
         birth_year = int(date[birth_year_col])
     except:
         pass
