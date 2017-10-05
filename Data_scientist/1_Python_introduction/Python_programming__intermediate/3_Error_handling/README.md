@@ -11,6 +11,20 @@ last\_name | first\_name | birthday | gender | type | state | party
 'Burke' | 'Aedanus' | '1743-06-16' | | 'rep' | 'SC' |
 'Carroll' | 'Daniel' | '1730-07-22' | 'M' | 'rep' | 'MD' |
 
+The file includes these columns:
+
+- `last_name` -- the legislator's last name
+- `first_name` -- the legislator's first name
+- `birthday` -- the legislator's birthday
+- `gender` -- the legislator's gender
+- `type` -- the chamber in which the legislator served - either Senate (`sen`) or House of Representatives (`rep`)
+- `state` -- the state the legislator represents
+- `party` -- the legislator's party affiliation
+
+As you can see from the data extract, some rows contain missing values for some columns. For example, 
+the `gender` and `party` columns are missing in the second row after the header row. Missing data can cause 
+errors, so it needs to be dealt with.
+
 2. Sets
 -------
 
