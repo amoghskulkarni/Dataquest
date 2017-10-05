@@ -140,5 +140,6 @@ Notable things are -
 
     ```python
     # With __str__() in the class
+    >> nfl_dataset
     [['2009', '1', 'Pittsburgh Steelers', 'Tennessee Titans'], ['2009', '1', 'Minnesota Vikings', 'Cleveland Browns'], ['2009', '1', 'New York Giants', 'Washington Redskins'], ['2009', '1', 'San Francisco 49ers', 'Arizona Cardinals'], ['2009', '1', 'Seattle Seahawks', 'St. Louis Rams'], ['2009', '1', 'Philadelphia Eagles', 'Carolina Panthers'], ['2009', '1', 'New York Jets', 'Houston Texans'], ['2009', '1', 'Atlanta Falcons', 'Miami Dolphins'], ['2009', '1', 'Baltimore Ravens', 'Kansas City Chiefs'], ['2009', '1', 'Indianapolis Colts', 'Jacksonville Jaguars']]
     ```
