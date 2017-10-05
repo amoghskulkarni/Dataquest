@@ -84,3 +84,61 @@ Abstract away the `nfl` variable and add it to the class definition by including
 -----------------
 
 Same as above. 
+
+## New tutorial
+
+In the new tutorial, we create a `Dataset` class which can be used to save the data in 'list of lists' form;
+and add some methods to it to operate upon the saved data. The following code snippet is the final result -
+
+```python
+nfl_dataset = Dataset(nfl_data)
+class Dataset:
+    def __init__(self, data):
+        self.header = data[0]
+        self.data = data[1:]
+    
+    def __str__(self):
+        data_string = self.data[:10]
+        return str(data_string)
+    
+    def column(self, label):
+        if label not in self.header:
+            return None
+        
+        index = 0
+        for idx, element in enumerate(self.header):
+            if label == element:
+                index = idx
+        
+        column = []
+        for row in self.data:
+            column.append(row[index])
+        return column
+    
+    def count_unique(self, label):
+        unique_results = set(self.column(label))
+        count = len(unique_results)
+        return count
+
+nfl_dataset = Dataset(nfl_data)
+print(nfl_dataset)
+```
+
+Notable things are -
+* `enumerate()` is used to get an index, instead of using a `counter` variable while iterating over a list.
+    ```python
+    mylist = ['a', 'b', 'c']
+    print(enumerate(mylist))         # [(0, 'a'), (1, 'b'), (2, 'c')]
+    ```
+* `__str__()` method is used to tell the python interpreter how to represent your object as a string.
+    ```python
+    # Without __str__() in the class
+    >> nfl_dataset = Dataset(nfl_data)
+    >> nfl_dataset
+    <__main__.Dataset instance at 0x10abc23b0>
+    ```
+
+    ```python
+    # With __str__() in the class
+    [['2009', '1', 'Pittsburgh Steelers', 'Tennessee Titans'], ['2009', '1', 'Minnesota Vikings', 'Cleveland Browns'], ['2009', '1', 'New York Giants', 'Washington Redskins'], ['2009', '1', 'San Francisco 49ers', 'Arizona Cardinals'], ['2009', '1', 'Seattle Seahawks', 'St. Louis Rams'], ['2009', '1', 'Philadelphia Eagles', 'Carolina Panthers'], ['2009', '1', 'New York Jets', 'Houston Texans'], ['2009', '1', 'Atlanta Falcons', 'Miami Dolphins'], ['2009', '1', 'Baltimore Ravens', 'Kansas City Chiefs'], ['2009', '1', 'Indianapolis Colts', 'Jacksonville Jaguars']]
+    ```
