@@ -87,6 +87,17 @@ for game in nfl:
 
 A function which has the above code in its body, and accepts the name of the team as an argument.
 
+```python
+winner_column = 2
+def nfl_wins(team):
+    for game in nfl:
+        if game[winner_column] == team:
+            patriots_wins += 1
+
+cowboys_wins = nfl_wins("Dallas Cowboys")
+falcons_wins = nfl_wins("Atlanta Falcons")
+```
+
 8. A brief note about booleans
 ------------------------------
 
