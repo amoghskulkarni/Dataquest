@@ -54,6 +54,19 @@ E.g. two functions defined in the global scope
 When a variable name is used in a _local_ scope, but it hasn't been defined in the scope yet, 
 the Python interpreter will check to see if the variable exists in the _global_ scope.
 
+In the following code snippet, `principal_outstanding_240` is a variable that holds all the entries
+from the currosponding column from data `student_loan_defaults.csv`. 
+
+```python
+def find_average(column):
+    total = sum(column)
+    # In this function, we are going to pretend that we forgot to calculate the length
+    return total / length
+
+length = 10
+average = find_average(principal_outstanding_240)
+```
+
 7. Inheritance limits
 ---------------------
 
@@ -66,6 +79,8 @@ def alter_a():
     a = a * 2
     return a
 ```
+
+In other words, the variables inherited from the global scope are _write protected_. 
 
 8. Built-in inheritance
 -----------------------
@@ -89,7 +104,7 @@ print(total([1,2]))
 9. Global variables
 -------------------
 
-We can access _global_ variables in local scopes using `global` keyword, as -
+We can make _global_ variables updatable in local scopes using `global` keyword, as -
 
 ```python
 global total
@@ -104,7 +119,7 @@ print(total)
 
 The above code will print `30` as the function will access the global variable.
 
-The _global_ variables can be declared inside a local scope as well. 
+**The _global_ variables can be declared inside a local scope as well**. 
 
 ```python
 def test_function():
