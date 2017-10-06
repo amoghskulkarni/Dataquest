@@ -173,6 +173,9 @@ top_female_names = []
 for name, count in name_counts.items():
     if count == 2:
         top_female_names.append(name)
+
+# List comprehension
+top_female_names = [k for k, v in name_counts.items() if v == 2]
 ```
 
 11. Finding the most common male names
