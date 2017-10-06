@@ -6,7 +6,7 @@ Data Scientist / Python Introduction / Python Programming: Intermediate / List c
 
 Legislators dataset at the end of the last example -
 
-last\_name | first\_name | birthday | gender | type | state | party | birth_year
+last\_name | first\_name | birthday | gender | type | state | party | birth\_year
 :---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:
 'Bassett' | 'Richard' | '1745-04-02' | 'M' | 'sen' | 'DE' | 'Anti-Administration' | 1745
 'Bland' | 'Theodorick' | '1742-03-21' | | 'rep' | 'VA' | | 1742
