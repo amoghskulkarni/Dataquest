@@ -66,20 +66,11 @@ class Suspension():
         name_col = 0
         teams_col = 1
         games_col = 2
+        year_col = 5
         self.name = s[name_col]
         self.teams = s[teams_col]
         self.games = s[games_col]
-        # self.year = s[year_col]
-        ### Instead of assigning the value at index 5 to the year property directly, use a try except block
-        try:
-            self.year = int(s[year_col])
-        except:
-            self.year = 0
-
-    def get_year(self):
-        return self.year
-    
-    def 
+        self.year = s[year_col]
 ```
 
 - Tweak the `Suspension` class to add more features 
@@ -88,13 +79,20 @@ class Suspension():
 ```python
 class Suspension():
     def __init__(self,row):
-        self.name = row[0]
-        self.team = row[1]
-        self.games = row[2] 
+        name_col = 0
+        teams_col = 1
+        games_col = 2
+        year_col = 5
+
+        self.name = row[name_col]
+        self.team = row[teams_col]
+        self.games = row[games_col] 
+        ### Instead of assigning the value at index 5 to the year property directly, use a try except block
         try:
-            self.year = int(row[5])
+            self.year = int(row[year_col])
         except Exception:
              self.year = 0
+
     def get_year(self):
         return(self.year)
                 
