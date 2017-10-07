@@ -34,7 +34,11 @@ Regex | Example matches | Example that don't match
 a.c | aac, abc, acc, alchemy, branch | add, crash
 ..t | bat, habit, oat | at, it
 
-In Python, we use the re module to work with regular expressions.
+In Python, we use the `re` module to work with regular expressions.
+
+Note that the second example in the table contains "habit" confirming to the Regex "..t".
+Thus we know now that the only requirement is that the pattern given by the regex should be
+a substring in the string that we are checking in.
 
 ```python
 strings = ["bat", "robotics", "megabyte"]
@@ -115,7 +119,7 @@ We can use `[]` for finding `of Reddit` and `of reddit` occurrances.
 
 ```python
 for row in posts:
-    if re.search("of [R,r]eddit", row[0]) is not None:
+    if re.search("of [Rr]eddit", row[0]) is not None:
         of_reddit_count += 1
 ```
 
@@ -140,18 +144,18 @@ Modify the above code snippet to take into account `[Serious]` as well as `[seri
 
 ```python
 for row in posts:
-    if re.search("\[[S,s]erious\]", row[0]) is not None:
+    if re.search("\[[Ss]erious\]", row[0]) is not None:
         serious_count += 1
 ```
 
-10. More inconsistency
-----------------------
+10. Adding More Complexity to Your Regular Expression
+-----------------------------------------------------
 
 Modify the above code snippet to take into account `(Serious)` and `(serious)` tags as well.
 
 ```python
 for row in posts:
-    if re.search("[\[,\(][Ss]erious[\],\)]", row[0]) is not None:
+    if re.search("[\[\(][Ss]erious[\]\)]", row[0]) is not None:
         serious_count += 1
 ```
 
@@ -169,15 +173,15 @@ serious_end_count = 0
 serious_count_final = 0
 
 for row in posts:
-    if re.search("^[\[,\(][Ss]erious[\],\)]", row[0]) is not None:
+    if re.search("^[\[\(][Ss]erious[\]\)]", row[0]) is not None:
         serious_start_count += 1
 
 for row in posts:
-    if re.search("[\[,\(][Ss]erious[\],\)]$", row[0]) is not None:
+    if re.search("[\[\(][Ss]erious[\]\)]$", row[0]) is not None:
         serious_end_count += 1
 
 for row in posts:
-    if re.search("^[\[,\(][Ss]erious[\],\)]|[\[,\(][Ss]erious[\],\)]$", row[0]) is not None:
+    if re.search("^[\[\(][Ss]erious[\]\)]|[\[\(][Ss]erious[\]\)]$", row[0]) is not None:
         serious_count_final += 1
 ```
 
@@ -191,7 +195,7 @@ Example - Replace all kind of **serious** tags to `[Serious]`
 
 ```python
 for post in posts:
-    post[0] = re.sub("[\[,\(][Ss]erious[\],\)]", "[Serious]", post[0])
+    post[0] = re.sub("[\[\(][Ss]erious[\]\)]", "[Serious]", post[0])
     posts_new.append(post)
 ```
 
