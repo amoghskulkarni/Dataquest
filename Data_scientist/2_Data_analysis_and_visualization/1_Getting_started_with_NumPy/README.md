@@ -45,12 +45,25 @@ our data.
 4. Using NumPy
 --------------
 
-Using `genfromtxt()` method of NumPy, csv files can be directly read into matrices.
+Using [`numpy.genfromtxt()`](https://docs.scipy.org/doc/numpy-1.10.0/reference/generated/numpy.genfromtxt.html) method of NumPy,
+ csv files can be directly read into matrices.
 
 ```python
 import numpy
 world_alcohol = numpy.genfromtxt("world_alcohol.csv", delimiter=",")
 ```
+
+The above code would read in a file named `world_alcohol.csv` file into a NumPy _array_. NumPy arrays are represented using the 
+[`numpy.ndarray`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html) class. We'll refer to ndarray objects 
+as NumPy arrays in our material.
+
+Here's the data that we are working with -
+
+Year|WHO Region|Country|Beverage Types|Display Value
+:---:|:--------:|:-----:|:------------:|:-----------:
+1986|Western Pacific|Viet Nam|Wine|0
+1986|Americas|Uruguay|Other|0.5
+1985|Africa|Cte d'Ivoire|Wine|1.62
 
 5. Creating arrays
 ------------------
@@ -69,10 +82,10 @@ NumPy arrays have `shape` property which returns their shape in the form of tupl
 
 ```python
 vector = numpy.array([1, 2, 3, 4])
-print(vector.shape)                 # (4,)
+print(vector.shape)                 # Returns (4,) - this is a tuple 
 
 matrix = numpy.array([[5, 10, 15], [20, 25, 30]])
-print(matrix.shape)                 # (2,3)
+print(matrix.shape)                 # Returns (2,3) - this is also a tuple
 ```
 
 7. Data types
