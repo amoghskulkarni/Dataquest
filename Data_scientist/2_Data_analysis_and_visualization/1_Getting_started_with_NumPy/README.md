@@ -93,6 +93,7 @@ print(matrix.shape)                 # Returns (2,3) - this is also a tuple
 
 Each value in a NumPy _array_ has to have the **_same_** data type. This is why they have
 `dtype` property which gives the datatype of their elements. It is `numpy.dtype` object.
+The full list of NumPy data types [here](https://docs.scipy.org/doc/numpy-1.10.1/user/basics.types.html). 
 
 ```python
 world_alcohol_dtype = world_alcohol.dtype
@@ -110,15 +111,20 @@ array([[             nan,              nan,              nan,              nan, 
        [  1.98600000e+03,              nan,              nan,              nan,   5.00000000e-01]])
 ```
 
-NumPy's `genfromtxt()` cannot read the datafileds which are strings, so it uses `nan` to represent
-them. When the values are not available, it uses `na`. 
+NumPy's `numpy.genfromtxt()` cannot read the datafileds which are strings, so it uses `nan` to represent
+them. When the values are not available, it uses `na`. `nan` and `na` values are types of missing data.
 
 9. Reading in data properly
 ---------------------------
 
 Our data wasn't read in properly, which resulted in NumPy trying to convert strings to floats, and nan values.
-We can fix this by specifying in the `genfromtxt()` method that we want to read in all the data as **strings**.
-While we're at it, we can also specify that we want to skip the header row of `world_alcohol.csv`.
+We can fix this by specifying in the `numpy.genfromtxt()` method that we want to read in all the data as **strings**.
+While we're at it, we can also specify that we want to skip the header row of `world_alcohol.csv`. 
+
+`skip_header` parameter takes an integer value, which tells numpy to ignore those many lines from the top as the \
+header for the data.
+
+`U75` specifies that we want to read in each value as a `75` byte `unicode` data type.
 
 ```python
 # U75 specifies the data is in unicode string
