@@ -141,9 +141,19 @@ vector = numpy.array([5, 10, 15, 20])
 vector.sum()                                # 50
 ```
 
+The following code snippet will extract the alcohol consumption from the `world_alcohol` dataset (5th column)
+and then run the `sum()` and `mean()` methods on it.
+
+```python
+alcohol_consumption = world_alcohol[:,4]    # Extraction of the column
+
+total_alcohol = alcohol_consumption.sum()   # Running the methods 
+average_alcohol = alcohol_consumption.mean()
+```
+
 With a matrix, we have to specify an additional keyword argument `axis`. The axis dictates which dimension 
 we perform the operation on. `1` means that we want to perform the operation on each row, and `0` means 
-on each column.
+on each column. (TODO: How does `axis` work in case of more than 2 dimensions?)
 
 ```python
 matrix = numpy.array([
@@ -161,9 +171,16 @@ Given a country and a year, we can find all the relevant entries from the datase
 (which is related to alcohol consumption) to find out total alcohol consumption in the country in that year.
 
 ```python
+# Find the rows where first column is "1986" and third column is "Canada"
 canada_1986 = world_alcohol[(world_alcohol[:, 0] == "1986") & (world_alcohol[:, 2] == "Canada"), :]
+
+# After finding those rows, replace the fifth column of the rows where the value is '' with "0" 
 canada_1986[(canada_1986[:, 4] == ''), 4] = "0"
+
+# Convert their fifth column to float datatype
 canada_alcohol = canada_1986[:, 4].astype(float)
+
+# Sum them up
 total_canadian_drinking = canada_alcohol.sum()
 ```
 
