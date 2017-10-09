@@ -64,7 +64,8 @@ a | b                   # [True, True, False, False]
 
 It also holds true with the arithmatic operations - addition, subtraction, multiplication, division, etc. 
 
-Using this we can compare an array using multiple conditions.
+Using this we can compare an array using multiple conditions. It is critical to put each one in parentheses 
+in this case. 
 
 ```python
 vector = numpy.array([5, 10, 15, 20])
@@ -81,8 +82,21 @@ to boolean values. You can either read or write after you get the access to them
 ```python
 vector = numpy.array([5, 10, 15, 20])
 equal_to_ten_or_five = (vector == 10) | (vector == 5)
+
 print(vector[equal_to_ten_or_five])                             # [5, 10]
+
 vector[equal_to_ten_or_five] = 50                               # [50, 50, 15, 20]
+```
+
+The following code snippet will replace all instances of the string `1986` in the first column, and all instances of
+the string `Wine` from the third column with `2014` and `Grog` respectively.
+
+```python
+first_col_1986 = (world_alcohol[:, 0] == '1986')
+world_alcohol[first_col_1986, 0] = '2014'
+
+third_col_Wine = (world_alcohol[:, 3] == 'Wine')
+world_alcohol[third_col_Wine, 3] = 'Grog'
 ```
 
 6. Replacing empty strings
