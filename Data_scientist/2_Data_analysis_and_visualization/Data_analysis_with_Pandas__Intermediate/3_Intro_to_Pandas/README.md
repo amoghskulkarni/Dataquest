@@ -20,6 +20,14 @@ Pandas DataFrames can also handle missing values gracefully using a custom objec
 A dataset from United States Department of Agriculture (USDA), contains nutritional information on the most common
 foods Americans consume. Out of many columns, **some** of them are -
 
+NDB_No|Shrt_Desc|Water_(g)|Energy_Kcal|Protein_(g)|Lipid_Tot_(g)|Ash_(g)|Carbohydrt_(g)|Fiber_TD_(g)|Sugar_Tot_(g)
+:---:|:--------:|:-------:|:---------:|:---------:|:-----------:|:-----:|:------------:|:----------:|:-----------:
+1001|BUTTER WITH SALT|15.87|717|0.85|81.11|2.11|0.06|0.0|0.06
+1002|BUTTER WHIPPED WITH SALT|15.87|717|0.85|81.11|2.11|0.06|0.0|0.06
+1003|BUTTER OIL ANHYDROUS|0.24|876|0.28|99.48|0.00|0.00|0.0|0.0
+
+Descriptions of the columns are -
+
 NDB_No | unique id of the food.
 :---: | :---: |
 Shrt_Desc | name of the food.
@@ -83,6 +91,28 @@ print(food_info.shape[0])       # 8618
 print(food_info.shape[1])       # 36
 ```
 
+`columns` property of the DataFrame object gives full list of column names. 
+
+```python
+column_names = food_info.columns
+print(column_names)
+```
+
+Gives you the output -
+
+```python
+Index(['NDB_No', 'Shrt_Desc', 'Water_(g)', 'Energ_Kcal', 'Protein_(g)',
+       'Lipid_Tot_(g)', 'Ash_(g)', 'Carbohydrt_(g)', 'Fiber_TD_(g)',
+       'Sugar_Tot_(g)', 'Calcium_(mg)', 'Iron_(mg)', 'Magnesium_(mg)',
+       'Phosphorus_(mg)', 'Potassium_(mg)', 'Sodium_(mg)', 'Zinc_(mg)',
+       'Copper_(mg)', 'Manganese_(mg)', 'Selenium_(mcg)', 'Vit_C_(mg)',
+       'Thiamin_(mg)', 'Riboflavin_(mg)', 'Niacin_(mg)', 'Vit_B6_(mg)',
+       'Vit_B12_(mcg)', 'Vit_A_IU', 'Vit_A_RAE', 'Vit_E_(mg)', 'Vit_D_mcg',
+       'Vit_D_IU', 'Vit_K_(mcg)', 'FA_Sat_(g)', 'FA_Mono_(g)', 'FA_Poly_(g)',
+       'Cholestrl_(mg)'],
+      dtype='object')
+```
+
 5. Indexing
 -----------
 
@@ -93,8 +123,8 @@ for the row labels. row indices start from 0, column indices are strings.
 ---------
 
 The **Series** object is a core data structure that Pandas uses to represent rows and columns. A Series is 
-a labelled collection of values similar to the NumPy vector. When you select a row from a DataFrame, instead 
-of just returning the values in that row as a list, Pandas returns a Series object that contains the column 
+a labelled collection of values similar to the `NumPy` vector. When you select a row from a `DataFrame`, instead 
+of just returning the values in that row as a list, Pandas returns a `Series` object that contains the column 
 labels as well as the corresponding values.
 
 7. Selecting a row
@@ -154,6 +184,8 @@ And, these `dtype`s are accessible with `[]` notation, like -
 
 ```python
 print(food_info.dtypes[0])          # int64
+# Or
+print(food_info.dtypes['Water_(g)'])
 ```
 
 9. Selecting multiple rows
@@ -171,6 +203,10 @@ food_info.loc[3:6]                  # row no. 3, 4, 5 and 6
 ```python
 two_five_ten = [2,5,10] 
 food_info.loc[two_five_ten]         # row no. 2, 5 and 10
+
+# Or
+
+food_info.loc[[2, 5, 10]]
 ```
 
 10. Selecting individual columns
@@ -181,8 +217,17 @@ for that column. To access a single column, use bracket notation and pass in the
 
 ```python
 # You can instead access a column by passing in a string variable.
-col_name = "NDB_No"
-ndb_col = food_info[col_name]
+ndb_col = food_info["NDB_No"]
+```
+
+One more method of accessing a column is a `.` notation. For that to work, the name of the column has to be a valid variable
+name (i.e. it must not start with a number, and it must not have a special character in it).
+
+```python
+ndb_col = food_info.NDB_No              # Works, assigns the currosponding column to ndb_col
+
+Water_col = food_info.Water_(g)         # Does not work (because the name of the column not being a valid vairiable name),
+                                        # throws an error
 ```
 
 11. Selecting multiple columns by name
@@ -194,6 +239,10 @@ Similar to selecting multiple rows (of course `:` notation is not applicable, on
 ```python
 columns = ["Zinc_(mg)", "Copper_(mg)"]
 zinc_copper = food_info[columns]
+
+# Or
+
+zinc_copper = food_info[["Zinc_(mg)", "Copper_(mg)"]]
 ```
 
 12. Practice
@@ -213,4 +262,25 @@ for c in col_names:
 gram_df = food_info[gram_columns]
 print(gram_df.head(3))
 ```
+
+Gives -
+
+```python
+# Output
+   Water_(g)  Protein_(g)  Lipid_Tot_(g)  Ash_(g)  Carbohydrt_(g)  \
+0      15.87         0.85          81.11     2.11            0.06   
+1      15.87         0.85          81.11     2.11            0.06   
+2       0.24         0.28          99.48     0.00            0.00   
+
+   Fiber_TD_(g)  Sugar_Tot_(g)  FA_Sat_(g)  FA_Mono_(g)  FA_Poly_(g)  
+0           0.0           0.06      51.368       21.021        3.043  
+1           0.0           0.06      50.489       23.426        3.012  
+2           0.0           0.00      61.924       28.732        3.694  
+```
+
+Note: [`endswith()`](https://docs.python.org/3/library/stdtypes.html#str.endswith) is a built-in method of the `string`
+class which returns `True` if the string ends with the specified suffix, otherwise returns `False`.
+
+[`tolist()`](http://pandas.pydata.org/pandas-docs/version/0.13.1/generated/pandas.Index.tolist.html) is a method of Panda
+`Series` object (?). 
 
