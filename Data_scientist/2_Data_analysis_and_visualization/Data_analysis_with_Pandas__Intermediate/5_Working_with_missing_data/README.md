@@ -42,8 +42,8 @@ age_null_true = age[age_is_null]
 age_null_count = len(age_null_true)             # Will give you the number of entries that have a valid number in age column
 ```
 
-3. What's the big deal with the missing data
---------------------------------------------
+3. What's the big deal with the missing data?
+---------------------------------------------
 
 The result of the following operation to calculate average age of the survivors of Titanic will be `NaN`, as some
 of the values are `NaN`.
@@ -108,10 +108,18 @@ fares_by_class = titanic_survival.pivot_table(index="pclass", values="fare", agg
 
 - The first parameter of the method, `index` tells the method which column to group by. 
 - The second parameter `values` is the column that we want to apply the calculation to.
-- `aggfunc` specifies the calculation we want to perform.  
+- `aggfunc` specifies the aggregation calculation we want to perform.  
 The default for the aggfunc parameter is actually the mean, so if we're calculating this we can omit this parameter.
 
-The method returns a `Series` object.
+The method returns a `Series` object. Output of the above line is -
+
+```python
+pclass
+1.0    39.159918
+2.0    29.506705
+3.0    24.816367
+Name: age, dtype: float64
+```
 
 7. More complex pivot tables
 ----------------------------
@@ -177,4 +185,114 @@ you get a new `DataFrame` which has rows with the labels which are not in order.
 In this `DataFrame`, you can reference the first row with `iloc[0]` (not with `loc[0]`, because the first row's label is
 not `0`).
 
+10. Using Column Indexes
+------------------------
+
+We can also index columns using both the `loc[]` and `iloc[]` methods. With `.loc[]`, we specify the column label strings
+as we have in the earlier exercises in this missions. With `iloc[]`, we simply use the integer number of the column, 
+starting from the left-most column which is `0`. 
+
+Similar to indexing with NumPy arrays, you separate the row and columns with a comma, and can use a colon to specify a range or as a wildcard.
+
+```python
+# .loc[]
+row_index_83_age = new_titanic_survival.loc[83, "age"]
+row_index_83_age = new_titanic_survival.loc[83]["age"]                  # This also works, but is not recommended
+row_index_83_age_sex = new_titanic_survival.loc[83]["age", "sex"]       # This doesnt work, throws error
+
+# .iloc[]
+first_row_age = new_titanic_survival.iloc[0, 4]                         # 4 is the column number of "age"
+first_row_age = new_titanic_survival.iloc[0, "age"]                     # DOES NOT WORK! .iloc is only used with integer number columns
+first_row_first_5_cols = new_titanic_survival.iloc[0, 0:5]              # Also works, unlike .loc
+```
+
+11. Reindexing Rows
+-------------------
+
+Since `loc[]` and `iloc[]` behave differently, reindexing is a method given for us. In case the array is sorted over some
+column, the indexes are mixed up. They can be reset using `reset_index()`.
+
+```python
+titanic_reindexed = new_titanic_survival.reset_index(drop=True)
+print(titanic_reindexed.iloc[0:5,0:3])
+```
+
+By default, the method retains the old index by adding an extra column to the dataframe with the old index values.
+In this example, we don't retain the index by giving `drop=True`.
+
+12. Apply Functions Over a DataFrame
+------------------------------------
+
+To perform a complex calculation across pandas objects, we'll need to learn about the 
+[`DataFrame.apply()`](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html) method. By default, 
+`DataFrame.apply()` will iterate through each column in a `DataFrame`, and perform on each function. When we create our 
+function, we give it one parameter, `apply()` method passes each column to the parameter as a pandas series.
+
+```python
+def column_null_count(column):
+    column_null = pd.isnull(column)
+    null_rows = column[column_null]
+    return len(null_rows)
+
+column_null_count = titanic_survival.apply(column_null_count)
+```
+
+The values returned get appended to a list and `apply()` returns the entire list. In the above example, the list will contain
+null counts for all the columns (so the list will have an entry for each column).
+
+13. Applying a Function to a Row
+--------------------------------
+
+```DataFrame.apply()` also has a parameter called `axis`. By default, its value is `0`, which means the `apply()` function
+will iterate over columns (i.e. we should expect columns one-by-one getting passed to our function).
+
+For applying our function for a row, pass `axis=1`. Example -
+
+```python
+def which_class(row):
+    pclass = row['pclass']
+    if pd.isnull(pclass):
+        return "Unknown"
+    elif pclass == 1:
+        return "First Class"
+    elif pclass == 2:
+        return "Second Class"
+    else:
+        return "Third Class"
+
+classes = titanic_survivors.apply(which_class, axis=1)
+```
+
+Excercise: Create a function that returns the string `"minor"` if someone is under 18, `"adult"` if they are equal to or over 18, 
+and `"unknown"` if their age is `null`.
+
+```python
+import pandas as pd
+def generate_age_label(row):
+    age = row["age"]
+    if pd.isnull(age):
+        return "unknown"
+    elif age < 18:
+        return "minor"
+    else:
+        return "adult"
+
+age_labels = titanic_survival.apply(generate_age_label, axis=1)
+```
+
+15. Calculating Survival Percentage by Age Group
+------------------------------------------------
+
+Now that we have age labels for everyone, let's make a pivot table to find the probability of survival for each age group.
+We have added an `"age_labels"` column to the dataframe containing the `age_labels` variable from the previous step.
+
+```python
+age_group_survival = titanic_survival.pivot_table(index="age_labels", values="survived")
+```
+
+This works because the `"survived"` column takes the values either `1.0` or `0.0` (1 instance also has `nan` value but we'll ignore that);
+and the fact that `aggfunc` parameter of the `pivot_table` has the default value `numpy.mean()`. 
+
+If we want to calculate something else, we need to give that function to `aggfunc`. Need to check if and how we can give our
+own custom method in `aggfunc`. 
 
