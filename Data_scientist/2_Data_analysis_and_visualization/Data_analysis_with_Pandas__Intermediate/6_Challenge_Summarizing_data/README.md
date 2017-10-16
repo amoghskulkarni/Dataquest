@@ -33,3 +33,6 @@ print(recent_grads.head(5))
 
 print(all_ages.loc[0:5])                # This also works
 ```
+
+2. Summarizing Major Categories
+-------------------------------
