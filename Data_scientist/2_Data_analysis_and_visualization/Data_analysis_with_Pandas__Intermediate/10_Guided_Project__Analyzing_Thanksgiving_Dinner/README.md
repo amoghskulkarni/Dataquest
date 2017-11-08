@@ -60,4 +60,4 @@ There are two columns which directly pertain to friendship, `Have you ever tried
 
 We use `pandas.DataFrame.pivot_table()` for this.
 
-
+`pivot_table()` aggregates the values in the column given by `values` argument in the function. The default `aggfunc` is `numpy.mean()`. The `index` argument contains column name or list of column names for which the values are grouped by. And `column` argument takes the name/s of the column/s which resultant dataframe will have. 
