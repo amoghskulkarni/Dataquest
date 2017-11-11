@@ -92,3 +92,36 @@ Let's visualize data from a few more years to see if we find any evidence for se
 -----
 
 By adding more line charts, we can look across more years for seasonal trends, but we now have to visually scan over more space, which is a limitation that we experienced when scanning the table representation of the same data. We can handle the visual overhead each additional plot adds by overlaying the line charts in a single subplot.
+If we remove the year from the x-axis and just keep the month values, we can use the same x-axis values to plot all of the lines. To extract the month values from the DATE column and assign them to a new column, we can use the [`pandas.Series.dt`](http://pandas.pydata.org/pandas-docs/stable/basics.html#basics-dt-accessors) accessor:
+
+```python
+unrate['MONTH'] = unrate['DATE'].dt.month
+```
+
+To generate multiple lines on the same plot, we call `plt.plot()` multiple times. If we call `pyplot.plot()` multiple times, matplotlib will generate the line charts on the single subplot. By default, matplotlib will select a different color for each line. To specify the color ourselves, use the `c` parameter when calling `plot()`:
+
+```python
+plt.plot(unrate[0:12]['MONTH'], unrate[0:12]['VALUE'], c='red')
+```
+
+## Adding A Legend
+
+-----
+
+To help remind us which year each line corresponds to, we can add a legend that links each color to the year the line is representing. 
+
+When we generate each line chart, we need to specify the text label we want each color linked to. The `pyplot.plot()` function contains a `label` parameter, which we use to set the year value:
+
+```python
+plt.plot(unrate[0:12]['MONTH'], unrate[0:12]['VALUE'], c='red', label='1948')
+```
+
+We can create the legend using [`pyplot.legend`](http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.legend) and specify its location using the `loc` parameter:
+
+```python
+plt.legend(loc='upper left')
+```
+
+In case of working with multiple plots, we can use `Axes` methods instead of `plt` methods.
+
+
